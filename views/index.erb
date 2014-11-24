@@ -1,0 +1,22 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8">
+<title>[bizevo] IPアドレス登録</title>
+</head>
+<body>
+<div align="center">
+<h2>[bizevo] IPアドレス登録</h2>
+アクセス制限解除を行うIPアドレスを登録します。<br/>
+次のIPアドレスでよろしければ、登録をクリックしてください。<br/>
+<br/>
+<form method=post>
+登録するIPアドレス： <%= request.ip %>
+<input type='hidden' name='addr' value='<%= request.ip %>'><br/>
+<input type='submit' value='　登録　'>
+</form>
+<pre>
+<% p ENV %>
+</pre>
+<br/><br/><hr>
+お問い合わせは、インフラ担当社員にお願いいたします。
+</div></body></html>

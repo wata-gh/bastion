@@ -1,0 +1,5 @@
+log/unicorn*
+vendor
+.bundle
+config.yml
+unicorn.pid

@@ -16,21 +16,18 @@ del         = require 'del'
 gulp        = require 'gulp'
 coffee      = require 'gulp-coffee'
 concat      = require 'gulp-concat'
-less        = require 'gulp-less'
 nodemon     = require 'gulp-nodemon'
 uglify      = require 'gulp-uglify'
 
 
 gulp.task 'default', ['clean'], ->
-  gulp.start 'compile:lib', 'compile:coffee', 'compile:less', 'compile:static'
+  gulp.start 'compile:lib', 'compile:static'
 
 gulp.task 'clean', (cb) ->
   del 'public/assets', cb
 
 gulp.task 'watch', ->
   gulp.watch sources.bower,  ['compile:lib']
-  gulp.watch sources.coffee, ['compile:coffee']
-  gulp.watch sources.less,   ['compile:less']
   gulp.watch sources.static, ['compile:static']
 
 
@@ -45,38 +42,16 @@ gulp.task 'compile:lib', ->
     gulp.src libs.static.map (e) -> "bower_components/#{e}"
       .pipe gulp.dest 'public/assets'
 
-gulp.task 'compile:coffee', ->
-  gulp.src sources.coffee
-    .pipe coffee()
-    .pipe ngAnnotate()
-    .pipe uglify()
-    .pipe concat 'app.js'
-    .pipe gulp.dest 'public/assets'
-
-gulp.task 'compile:less', ->
-  gulp.src sources.less
-    .pipe less()
-    .pipe concat 'app.css'
-    .pipe gulp.dest 'public/assets'
-
 gulp.task 'compile:static', ->
   gulp.src sources.static
     .pipe gulp.dest 'public/assets'
 
 
-gulp.task 'server', ['compile:apimock'], ->
+gulp.task 'server', ->
   gulp.start 'watch', 'watch:apimock'
   nodemon
-    script: 'target/apimock.js'
-    watch: ['target/apimock.js', 'public/assets']
+    watch: ['public/assets']
     env:
       port: 8888
       webapp: "#{__dirname}/public/assets"
 
-gulp.task 'watch:apimock', ->
-  gulp.watch 'apimock.coffee', ['compile:apimock']
-
-gulp.task 'compile:apimock', ->
-  gulp.src 'apimock.coffee'
-    .pipe coffee()
-    .pipe gulp.dest 'target/'

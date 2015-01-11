@@ -1,0 +1,43 @@
+.column {
+  margin-top: 40px;
+}
+.library {
+  font-size: 1.75em;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+.introduction {
+  position: relative;
+  clear: both;
+  display: block;
+  text-align: center;
+}
+
+.text {
+  display: inline-block;
+  font-weight: 300;
+  margin-left: -0.4em;
+}
+
+.main.container {
+  margin: 0em auto;
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.05);
+  border-left: 1px solid #DDDDDD;
+  border-right: 1px solid #DDDDDD;
+  border-bottom: 1px solid #DDDDDD;
+  padding: 2em 2em 7em;
+  z-index: 1;
+}
+
+.ui.statistic {
+  max-width: 90%;
+}
+
+.ip-address {
+  font-size: 1.75em;
+}
+
+.ui.footer {
+  text-align: center;
+}

@@ -3,3 +3,6 @@ vendor
 .bundle
 config.yml
 unicorn.pid
+/bower_components/
+/public/assets/
+/node_modules/

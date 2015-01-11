@@ -65,7 +65,7 @@ namespace :deploy do
   task :update do
     run_locally do
       app_name = fetch :application
-#      execute "git pull" # always update for now.
+      execute "git pull" # always update for now.
 #      if test "[ -d #{app_name} ]"
 #        execute "cd #{app_name}; git pull"
 #      else

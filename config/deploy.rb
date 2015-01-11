@@ -44,22 +44,16 @@ Rake::Task[:deploy].clear
 namespace :deploy do
 
   def graceful_unicorn
-    pid_path = fetch :pid_path
+    app_name = fetch :application
     deploy_to = fetch :deploy_to
+    release_path = fetch :deploy_to
+    pid_path = File.join release_path, app_name, 'unicorn.pid'
     if test "[ -f #{pid_path} ]"
-      info "working directory #{deploy_to}"
-      execute "cd #{deploy_to}"
       info "sending signal to `cat #{pid_path}`"
       execute "kill -s USR2 `cat #{pid_path}`"
+    else
+      execute "cd #{release_path}; bundle exec unicorn -c unicorn.rb -D -E production"
     end
-  end
-
-  def bundle_install(env)
-    deploy_to = env + "_deploy_to"
-    deploy_from = env + "_deploy_from"
-    execute "cp -pr #{fetch deploy_from.to_sym}/* #{fetch deploy_to.to_sym}"
-    execute "cd #{fetch deploy_to.to_sym} && \
-             rbenv exec bundle install  --path vendor/bundle"
   end
 
   task :update do
@@ -71,6 +65,12 @@ namespace :deploy do
 #      else
 #        execute "git clone #{fetch :repo_url} #{app_name}"
 #      end
+      info 'bundle install'
+      execute "bundle install --path vendor/bundle"
+      info 'npm install'
+      execute "npm install"
+      info 'gulp'
+      execute "gulp"
     end
   end
 
@@ -102,6 +102,7 @@ namespace :deploy do
       execute "cd #{release_path}; tar zxvf #{archive_name}"
       info "graceful unicorn."
       graceful_unicorn
+      info "graceful unicorn done`."
     end
   end
 

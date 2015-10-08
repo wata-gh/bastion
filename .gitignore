@@ -1,4 +1,5 @@
 log/unicorn*
+log/sgreset.log*
 vendor
 .bundle
 config.yml

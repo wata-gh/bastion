@@ -4,7 +4,7 @@ worker_processes 1
 working_directory @dir
 
 timeout 300
-listen '/var/socket/bizevo_platform_unicorn.sock', backlog: 1024
+listen '/var/socket/bastion_unicorn.sock', backlog: 1024
 
 pid "#{@dir}/unicorn.pid"
 

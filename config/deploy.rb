@@ -1,13 +1,13 @@
 # config valid only for current version of Capistrano
 lock '3.3.5'
 
-set :application, 'platform'
-set :repo_url, 'https://github.com/wata-gh/platform.git'
+set :application, 'bastion'
+set :repo_url, 'https://github.com/wata-gh/bastion.git'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
-set :deploy_to, '/opt/bizevo/platform'
+set :deploy_to, '/opt/bastion'
 
 # Default value for :scm is :git
 # set :scm, :git

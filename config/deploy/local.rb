@@ -6,7 +6,7 @@
 
 role :web, %w{platform@localhost}
 
-set :deploy_to, '/opt/bizevo/'
+set :deploy_to, '/opt/bastion/'
 
 # Extended Server Syntax
 # ======================
@@ -14,7 +14,7 @@ set :deploy_to, '/opt/bizevo/'
 # server list. The second argument is a, or duck-types, Hash and is
 # used to set extended properties on the server.
 
-server 'localhost', user: 'platform', roles: %w{web app}
+server 'localhost', user: 'bastion', roles: %w{web app}
 
 
 # Custom SSH Options

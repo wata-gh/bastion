@@ -1,0 +1,6 @@
+#!/bin/sh
+
+BASEDIR=$(cd `dirname $0`/..; pwd)
+cd $BASEDIR
+
+bundle exec unicorn -c config/unicorn/production.rb -D

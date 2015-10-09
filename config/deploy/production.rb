@@ -4,7 +4,7 @@
 # is considered to be the first unless any hosts have the primary
 # property set.  Don't declare `role :all`, it's a meta role.
 
-role :web, %w{bizevo-platform}
+role :app, %w{bizevo-platform}
 
 
 # Extended Server Syntax
@@ -13,7 +13,7 @@ role :web, %w{bizevo-platform}
 # server list. The second argument is a, or duck-types, Hash and is
 # used to set extended properties on the server.
 
-server 'bizevo-platform', user: 'centos', roles: %w{web}
+server 'bizevo-platform', user: 'centos', roles: %w{app}
 
 
 # Custom SSH Options

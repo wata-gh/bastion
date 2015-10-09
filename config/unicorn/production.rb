@@ -1,12 +1,12 @@
-@dir = File.expand_path './', File.dirname(__FILE__)
+@dir = File.expand_path '../../', File.dirname(__FILE__)
 
 worker_processes 1
 working_directory @dir
 
 timeout 300
-listen '/tmp/bastion_unicorn.sock', backlog: 1024
+listen "#{@dir}/tmp/socket/bastion_unicorn.sock", backlog: 1024
 
-pid "#{@dir}/unicorn.pid"
+pid "#{@dir}/tmp/pids/unicorn.pid"
 
 stderr_path "#{@dir}/log/unicorn.stderr.log"
 stdout_path "#{@dir}/log/unicorn.stdout.log"

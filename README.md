@@ -16,6 +16,9 @@ npm install
 
 # run gulp
 gulp
+
+# run unicorn
+RACK_ENV=production ./script.unicorn
 ```
 
 ## Capistrano

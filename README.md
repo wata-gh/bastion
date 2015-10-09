@@ -18,7 +18,7 @@ RACK_ENV=production ./script/unicorn
 
 ## Capistrano
 
-If you are using capistrano, you can set environment settings and deploy.
+If you are using capistrano, you can set environment(config/unicorn/production.rb) settings and deploy.
 
 ```shell
 bundle exec cap production deploy

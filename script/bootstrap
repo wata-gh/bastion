@@ -1,0 +1,8 @@
+#!/bin/sh
+
+BASEDIR=$(cd `dirname $0`/..; pwd)
+cd $BASEDIR
+
+bundle --path vendor/bundle
+
+npm install

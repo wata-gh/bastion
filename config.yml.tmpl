@@ -1,13 +1,13 @@
 :app:
   :name: bastion
 :aws_config:
-  :access_key_id: ''
-  :secret_access_key: ''
+  :access_key_id: '[Your Access Key]'
+  :secret_access_key: '[Your Secret Key]'
   :region: 'ap-northeast-1'
 :security_group:
   :bastion:
-    :group_id: ''
-    :defaults: []
+    :group_id: '[bastion Security Group Id. e.g. sg-xxxxxxxx]'
+    :defaults: ['1.1.1.1:22']
   :webservice:
-    :group_id: ''
-    :defaults: []
+    :group_id: '[web server(maybe elb) Security Group Id. e.g. sg-xxxxxxxx]'
+    :defaults: ['1.1.1.1:80']

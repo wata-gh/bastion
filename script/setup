@@ -1,0 +1,53 @@
+#!/bin/sh
+
+BASEDIR=$(cd `dirname $0`/..; pwd)
+cd $BASEDIR
+
+./script/bootstrap
+
+echo 'This will setup config.yml'
+echo 'Would you like to setup now? (y/n)'
+read ans
+case $ans in
+y)
+;;
+*)
+exit
+;;
+esac
+
+/bin/echo -n 'Your application name [None]: '
+read name
+
+/bin/echo -n 'AWS Access Key ID [None]: '
+read akey
+
+/bin/echo -n 'AWS Secret Access Key [None]: '
+read skey
+
+/bin/echo -n 'AWS region name [None]: '
+read region
+
+/bin/echo -n 'bastion security group id(e.g. sg-xxxxxxxx) [None]: '
+read bgi
+
+/bin/echo -n 'bastion default ip:port (e.g. 1.2.3.4:22) [None]: '
+read bip
+
+/bin/echo -n 'web server(maybe elb) security group id(e.g. sg-xxxxxxxx) [None]: '
+read wgi
+
+/bin/echo -n 'web server(maybe elb) default ip:port (e.g. 1.2.3.4:80) [None]: '
+read wip
+
+cat config.yml.tmpl | sed -e "s/  :name:.*/  :name: $name/" \
+-e "s/  :access_key_id:.*/  :access_key_id: $akey/" \
+-e "s/  :secret_access_key:.*/  :secret_access_key: $skey/" \
+-e "s/  :region:.*/  :region: $region/" \
+-e "s/    :group_id: '\[bastion.*/    :group_id: $bgi/" \
+-e "s/    :defaults: \['1.1.1.1:22'\].*/    :defaults: ['$bip']/" \
+-e "s/    :group_id: '\[web server.*/    :group_id: $wgi/" \
+-e "s/    :defaults: \['1.1.1.1:80'\].*/    :defaults: ['$wip']/" \
+> config.yml
+
+cat config.yml

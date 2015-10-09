@@ -8,14 +8,9 @@ Bastion is a web application maintains AWS Security Groups.
 # clone source
 git clone https://github.com/wata-gh/bastion.git
 
-# bundle install gems
-bundle --path vendor/bundle
-
-# npm install
-npm install
-
-# run gulp
-gulp
+# setup (you need npm to setup)
+cd bastion
+./script/setup
 
 # run unicorn
 RACK_ENV=production ./script/unicorn
@@ -56,3 +51,5 @@ Here is a sample crontab.
 ```
 0 * * * * /opt/bastion/script/sgreset
 ```
+
+sgreset program log will be output in log/sgreset.log .

@@ -52,4 +52,4 @@ Here is a sample crontab.
 0 * * * * /opt/bastion/script/sgreset
 ```
 
-sgreset program log will be output in log/sgreset.log .
+Sgreset program's log will be output in log/sgreset.log .

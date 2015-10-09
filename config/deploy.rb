@@ -7,7 +7,7 @@ set :repo_url, 'https://github.com/wata-gh/bastion.git'
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
-set :deploy_to, '/opt/bastion'
+set :deploy_to, '/opt'
 
 # Default value for :scm is :git
 # set :scm, :git
@@ -52,6 +52,7 @@ namespace :deploy do
       info "sending signal to `cat #{pid_path}`"
       execute "kill -s USR2 `cat #{pid_path}`"
     else
+      execute 'whoami'
       execute "cd #{release_path}; bundle exec unicorn -c unicorn.rb -D -E production"
     end
   end
@@ -94,7 +95,7 @@ namespace :deploy do
     release_path = fetch :deploy_to
     #release_path = File.join(fetch(:deploy_to), fetch(:application))
     on roles :web do
-      execute "mkdir -p #{release_path}" unless test "[ -d #{release_path} ]"
+      execute "sudo mkdir -p #{release_path} && sudo chown webservice:webservice #{release_path}" unless test "[ -d #{release_path} ]"
       info "uplading.. #{archive_path} -> #{release_path}"
       upload! archive_path, release_path
       info "extracting to #{release_path}"

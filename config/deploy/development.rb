@@ -6,15 +6,13 @@
 
 role :web, %w{webservice@localhost}
 
-set :deploy_to, '/opt/bastion/'
-
 # Extended Server Syntax
 # ======================
 # This can be used to drop a more detailed server definition into the
 # server list. The second argument is a, or duck-types, Hash and is
 # used to set extended properties on the server.
 
-server 'localhost', user: 'webservice', roles: %w{web app}
+server 'localhost', user: 'webservice', password: 'webservice!', roles: %w{web}
 
 
 # Custom SSH Options

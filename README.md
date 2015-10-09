@@ -18,6 +18,14 @@ npm install
 gulp
 ```
 
+## Capistrano
+
+If you are using capistrano, you can set environment settings and deploy.
+
+```shell
+bundle exec cap production deploy
+```
+
 ## Setup Configuration
 
 ```yaml

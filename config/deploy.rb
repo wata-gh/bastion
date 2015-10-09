@@ -7,6 +7,7 @@ set :repo_url, 'https://github.com/wata-gh/bastion.git'
 set :deploy_to, '/opt'
 set :keep_releases, 5
 set :linked_dirs, %w{bin log tmp/pids tmp/cache bundle}
+set :unicorn_rack_env, fetch(:stage)
 
 namespace :deploy do
 

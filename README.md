@@ -50,6 +50,7 @@ bundle exec cap production deploy
 ## Security Group Reset Batch
 
 Set security group reset batch and reset everyday.
+This program will revoke security group ingress except default IPs set on above.
 Here is a sample crontab.
 
 ```

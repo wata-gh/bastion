@@ -10,6 +10,7 @@ set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/socket bundle}
 set :unicorn_rack_env, fetch(:stage)
 set :unicorn_config_path, File.join(fetch(:deploy_to), 'current/config/unicorn', "#{fetch(:stage)}.rb")
 
+after 'deploy:publishing', 'deploy:restart'
 namespace :deploy do
 
   desc 'Restart application'
@@ -18,6 +19,4 @@ namespace :deploy do
       invoke 'unicorn:restart'
     end
   end
-
-  after :publishing, :restart
 end

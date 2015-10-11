@@ -8,19 +8,17 @@ Bastion is a web application maintains AWS Security Groups.
 # clone source
 git clone https://github.com/wata-gh/bastion.git
 
-# bundle install gems
-bundle --path vendor/bundle
+# setup (you need npm to setup)
+cd bastion
+./script/setup
 
-# npm install
-npm install
-
-# run gulp
-gulp
+# run unicorn
+RACK_ENV=production ./script/unicorn
 ```
 
 ## Capistrano
 
-If you are using capistrano, you can set environment settings and deploy.
+If you are using capistrano, you can set environment(config/unicorn/production.rb) settings and deploy.
 
 ```shell
 bundle exec cap production deploy
@@ -47,8 +45,11 @@ bundle exec cap production deploy
 ## Security Group Reset Batch
 
 Set security group reset batch and reset everyday.
+This program will revoke security group ingress except default IPs set on above.
 Here is a sample crontab.
 
 ```
 0 * * * * /opt/bastion/script/sgreset
 ```
+
+Sgreset program's log will be output in log/sgreset.log .

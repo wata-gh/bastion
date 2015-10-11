@@ -41,3 +41,7 @@
 .ui.footer {
   text-align: center;
 }
+
+.main.container {
+  padding: 20px 2em 7em;
+}

@@ -1,0 +1,6 @@
+development:
+  adapter: sqlite3
+  database: bastion_development.db
+production:
+  adapter: sqlite3
+  database: bastion_production.db

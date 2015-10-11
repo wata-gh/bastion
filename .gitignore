@@ -7,3 +7,5 @@ unicorn.pid
 /bower_components/
 /public/assets/
 /node_modules/
+bastion_development.db
+bastion_production.db

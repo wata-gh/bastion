@@ -5,6 +5,9 @@ cd $BASEDIR
 
 ./script/bootstrap
 
+bundle exec rake db:create
+bundle exec rake db:migrate
+
 echo 'This will setup config.yml'
 echo 'Would you like to setup now? (y/n)'
 read ans

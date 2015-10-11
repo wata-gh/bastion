@@ -1,0 +1,36 @@
+#!/bin/bash
+
+function usage () {
+	echo "$0 username email password"
+	exit 1
+}
+
+if [ $# -ne 3 ]
+then
+	usage
+fi
+
+USERNAME="$1"
+EMAIL="$2"
+PASS="$3"
+
+SSL_DIR=`dirname $0`
+SSL_PRIVATE_DIR="$SSL_DIR"
+SSL_CERTS_DIR="$SSL_DIR"
+USERS_DIR="${SSL_CERTS_DIR}/users"
+
+mkdir -p ${USERS_DIR}
+
+# Create the Client Key and CSR
+openssl genrsa -des3 -passout pass:$PASS -out ${USERS_DIR}/${USERNAME}.key 2048
+openssl req -new -key ${USERS_DIR}/${USERNAME}.key -passin pass:$PASS -out ${USERS_DIR}/${USERNAME}.csr \
+  -subj "/C=JP/ST=Tokyo/L=Chiyoda-Ku/O=/OU=/CN=${USERNAME}"
+
+# Sign the client certificate with our CA cert.  Unlike signing our own server cert, this is what we want to do.
+openssl x509 -req -days 1095 -passin pass:bastion -in ${USERS_DIR}/${USERNAME}.csr -CA $SSL_CERTS_DIR/ca.crt -CAkey $SSL_PRIVATE_DIR/ca.key -CAserial $SSL_DIR/serial -CAcreateserial -out ${USERS_DIR}/${USERNAME}.crt
+
+echo "making p12 file"
+#browsers need P12s (contain key and cert)
+openssl pkcs12 -export -clcerts -passin pass:$PASS -passout pass:$PASS -in ${USERS_DIR}/${USERNAME}.crt -inkey ${USERS_DIR}/${USERNAME}.key -out ${USERS_DIR}/${USERNAME}.p12
+
+echo "made ${USERS_DIR}/${USERNAME}.p12"
